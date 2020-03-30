@@ -1,0 +1,75 @@
+
+body {
+  background-color: rgb(185, 180, 180);
+}
+
+.todo-list {
+  background-color: white;
+  margin: auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #efefef;
+  box-shadow:
+    /* The top layer shadow */
+    0 1px 1px rgba(0, 0, 0, 0.15),
+    /* The second layer */
+    0 10px 0 -5px #eee,
+    /* The second layer shadow */
+    0 10px 1px -4px rgba(0, 0, 0, 0.15),
+    /* The third layer */
+    0 20px 0 -10px #eee,
+    /* The third layer shadow */
+    0 20px 1px -9px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 20px 0;
+  width: 70%;
+  border-bottom: 1px solid #cecece;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #4CAF50 ;
+}
+
+input[type=checkbox] {
+  margin-right: 10px;
+  font-size: 30px;
+}
+
+input[type=checkbox]:focus {
+  outline: 0;
+}
+
+input[type=text] {
+  margin-right: 10px;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+  width: 80vh;
+}
+.clear{
+  background-color: #4CAF50;
+  border:none;
+  margin-top:5px;
+  padding: 10px 32px;
+  color:white;
+  font-size: medium;
+}
+.title{
+  text-align: center;
+  color:#4CAF50;
+}
+.todo-item > button{
+  background-color: #4CAF50;
+  border:none;
+  margin-left:100px;
+  padding: 10px 10px;
+  color:white;
+}
