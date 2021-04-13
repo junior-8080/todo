@@ -5,6 +5,7 @@ import  './index.css';
 
 
 class App extends Component{
+
     constructor(){
         super()
         this.state ={
@@ -16,11 +17,13 @@ class App extends Component{
         this.handleClear = this.handleClear.bind(this)
         this.delete = this.delete.bind(this)
     }
+
     addTodo(todo){
       this.setState({
           todos:[todo,...this.state.todos]
       })
     }
+
     delete(id){
         const prevTodo = [...this.state.todos]
         const newTodos = prevTodo.filter((prevTodo,index)=>{
@@ -32,6 +35,7 @@ class App extends Component{
             todos:newTodos
         })
     }
+
     handleCheckChange(id){
         this.setState(prevState=>{
         const updatedTodos = prevState.todos.map(todo=>{
@@ -49,12 +53,14 @@ class App extends Component{
             }
         })
     }
+
     handleClear(){
         localStorage.removeItem('data')
         this.setState({
             todos:[]
         })
     }
+
     componentDidMount(){
         const todoList = JSON.parse(localStorage.getItem("data"))
         console.log(todoList)
@@ -65,6 +71,7 @@ class App extends Component{
         : null
 
     }
+
     componentDidUpdate(prevProps,prevState){
             const jsonTodo = JSON.stringify(this.state.todos)
             localStorage.setItem("data",jsonTodo)    
@@ -72,12 +79,18 @@ class App extends Component{
     }
     
     render(){
-        const Todos = this.state.todos ?
-            this.state.todos.map(todo =>{
-                return (
-                    <TodoItem key={todo.id} todo={todo} handleCheckChange={this.handleCheckChange} onDelete={this.delete}/>  
-                )
-         })
+        const Todos = this.state.todos.length > 0 ?<>
+          <table width="100%">
+              {
+                 this.state.todos.map(todo =>{
+                    return (
+                        <TodoItem key={todo.id} todo={todo} handleCheckChange={this.handleCheckChange} onDelete={this.delete}/>  
+                    )
+             })
+              }
+          </table>
+           {this.state.todos?<span>{this.state.todos.length} items</span>:null}
+           </>
          : <h1> Add a todo</h1>
         return(
             <div className="todo-list">

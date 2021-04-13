@@ -37,8 +37,11 @@ class  TodoForm extends Component{
         return(
             <form onSubmit={this.handleSubmit}>
                 <h1 className="title">TODO LIST</h1>
-                <input type="text" value={this.state.text} onChange={this.handleChange} placeholder="Enter your task"/>
-                <button type="button"  className="clear" onClick={this.handleClear}>Clear Todos</button>
+                <div className="todo-form">
+                    <input type="text" value={this.state.text} onChange={this.handleChange} placeholder="Enter your task"/>
+                    <button type="button"  className="clear" onClick={this.handleSubmit}>Add</button>
+                </div>
+                <button type="button"  className="clear" style={{background:"red"}} onClick={this.handleClear}>Clear Todos</button>
             </form> 
         )
     }
