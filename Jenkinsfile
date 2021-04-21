@@ -15,7 +15,7 @@ pipeline{
 
         stage("build - dev"){
            when {
-               any0f{branch 'develop'}
+               branch 'develop'
            }
            steps {
                sh 'rm env || true'
