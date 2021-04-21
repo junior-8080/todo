@@ -2,8 +2,10 @@ pipeline{
     agent any
 
     environment {
-        imageName = "junior_8080/todo"
+        imageName = "dtr.esoko.com:5000/esoko/todo-app:dev"
         imageTag = "${env.BUILD_ID}"
+        DOCKERHUB_CRED = credentials('DOCKERHUB_CRED')
+        TAG = sh(returnStdout: true, script: "git tag --points-at=HEAD")
     }
 
     stages {
@@ -31,6 +33,17 @@ pipeline{
          stage("deploy"){
             steps{
                  echo 'deploying the app'
+            }
+        }
+
+        stage("release") {
+            when {
+                tag 'v*'
+            }
+            steps {
+                sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
+                sh "docker login --username ${DOCKERHUB_CRED_USR} --password '${DOCKERHUB_CRED_PSW}'"
+                sh "docker push ${imageName}:${TAG}"
             }
         }
     }
