@@ -25,12 +25,12 @@ pipeline{
 
          stage("testing"){
             steps{
-                 echo 'buidling the app'
+                 echo 'testing  not implemented'
             }
         }
          stage("deploy"){
             steps{
-                 echo 'buidling the app'
+                 echo 'deploying the app'
             }
         }
     }
