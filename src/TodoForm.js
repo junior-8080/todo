@@ -36,7 +36,7 @@ class  TodoForm extends Component{
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
-                <h1 className="title"> TODO LIST </h1>
+                <h1 className="title"> THIS IS A TODO LIST </h1>
                 <div className="todo-form">
                     <input type="text" value={this.state.text} onChange={this.handleChange} placeholder="Enter your task"/>
                     <button type="button"  className="clear" onClick={this.handleSubmit}>Add</button>
