@@ -22,9 +22,9 @@ pipeline{
            steps {
                sh 'rm env || true'
                sh "docker build -f Dockerfile -t ${devImageName}:${imageTag} ."
-            //    sh "docker tag ${devImageName}:${imageTag} ${devImageName}:alpha"
-               sh "docker push ${devImageName}:${imageTag}"
-            //    sh "docker push ${devImageName}:alpha"
+               sh "docker tag ${devImageName}:${imageTag} ${devImageName}:alpha"
+            //    sh "docker push ${devImageName}:${imageTag}"
+               sh "docker push ${devImageName}:alpha"
            }
         }
 
