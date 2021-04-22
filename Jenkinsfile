@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment {
-        devImageName = "dtr.esoko.com:5000/esoko/todo-app:dev"
+        devImageName = "dtr.esoko.com:5000/esoko/todo-app-dev"
         imageTag = "${env.BUILD_ID}"
         // DOCKERHUB_CRED = credentials('DOCKERHUB_CRED')
         // TAG = sh(returnStdout: true, script: "git tag --points-at=HEAD")
