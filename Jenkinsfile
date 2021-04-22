@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment {
-        imageName = "dtr.esoko.com:5000/esoko/todo-app:dev"
+        devImageName = "dtr.esoko.com:5000/esoko/todo-app:dev"
         imageTag = "${env.BUILD_ID}"
         DOCKERHUB_CRED = credentials('DOCKERHUB_CRED')
         TAG = sh(returnStdout: true, script: "git tag --points-at=HEAD")
@@ -21,7 +21,10 @@ pipeline{
            }
            steps {
                sh 'rm env || true'
-               sh "docker build -f Dockerfile -t ${imageName}:${imageTag} ."
+               sh "docker build -f Dockerfile -t ${devImageName}:${imageTag} ."
+            //    sh "docker tag ${devImageName}:${imageTag} ${devImageName}:alpha"
+               sh "docker push ${devImageName}:${imageTag}"
+            //    sh "docker push ${devImageName}:alpha"
            }
         }
 
@@ -41,9 +44,10 @@ pipeline{
                 tag 'v*'
             }
             steps {
-                sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
-                sh "docker login --username ${DOCKERHUB_CRED_USR} --password '${DOCKERHUB_CRED_PSW}'"
-                sh "docker push ${imageName}:${TAG}"
+                // sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
+                // sh "docker login --username ${DOCKERHUB_CRED_USR} --password '${DOCKERHUB_CRED_PSW}'"
+                // sh "docker push ${imageName}:${TAG}"
+                echo 'release'
             }
         }
     }
