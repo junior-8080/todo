@@ -12,7 +12,7 @@ pipeline{
     stages {
         stage("build - prod"){
             when {
-                tag 'v*'
+                branch 'master'
             }
             steps{
                    sh "docker build -f Dockerfile.prod -t ${imageName}:${imageTag} ."
@@ -45,7 +45,7 @@ pipeline{
 
         stage("release") {
             when {
-                tag 'v*'
+                 branch 'master'
             }
             steps {
                 sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
