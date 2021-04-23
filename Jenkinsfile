@@ -6,7 +6,7 @@ pipeline{
         imageName = "junior8080/todo_app"
         imageTag = "${env.BUILD_ID}"
         DOCKERHUB_CRED = credentials('docker_id')
-        TAG = sh(returnStdout: true, script: "git tag --points-at=HEAD")
+        TAG = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
     }
 
     stages {
