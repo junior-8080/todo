@@ -3,15 +3,19 @@ pipeline{
 
     environment {
         devImageName = "dtr.esoko.com:5000/esoko/todo-app-dev"
+        imageName = "junior8080/todo_app"
         imageTag = "${env.BUILD_ID}"
-        // DOCKERHUB_CRED = credentials('DOCKERHUB_CRED')
-        // TAG = sh(returnStdout: true, script: "git tag --points-at=HEAD")
+        DOCKERHUB_CRED = credentials('docker_id')
+        TAG = sh(returnStdout: true, script: "git tag --points-at=HEAD")
     }
 
     stages {
         stage("build - prod"){
+            when {
+                tag 'v*'
+            }
             steps{
-                 echo 'buidling the app'
+                   sh "docker build -f Dockerfile.prod -t ${imageName}:${imageTag} ."
             }
         }
 
@@ -44,9 +48,9 @@ pipeline{
                 tag 'v*'
             }
             steps {
-                // sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
-                // sh "docker login --username ${DOCKERHUB_CRED_USR} --password '${DOCKERHUB_CRED_PSW}'"
-                // sh "docker push ${imageName}:${TAG}"
+                sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
+                sh "docker login --username ${DOCKERHUB_CRED_USR} --password '${DOCKERHUB_CRED_PSW}'"
+                sh "docker push ${imageName}:${TAG}"
                 echo 'release'
             }
         }
