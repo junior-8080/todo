@@ -91,7 +91,7 @@ class App extends Component{
           </table>
            {this.state.todos?<span>{this.state.todos.length} items</span>:null}
            </>
-         : <h1> Add a todo</h1>
+         : <h1> Create a todo</h1>
         return(
             <div className="todo-list">
                 <TodoForm onSubmit={this.addTodo} onClear={this.handleClear} />
