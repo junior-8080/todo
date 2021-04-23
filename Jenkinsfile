@@ -6,13 +6,13 @@ pipeline{
         imageName = "junior8080/todo_app"
         imageTag = "${env.BUILD_ID}"
         DOCKERHUB_CRED = credentials('docker_id')
-        TAG = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
+        TAG = sh(returnStdout: true, script: "git tag --points-at=HEAD")
     }
 
     stages {
         stage("build - prod"){
             when {
-                branch 'master'
+                tag 'v*'
             }
             steps{
                    sh "docker build -f Dockerfile.prod -t ${imageName}:${imageTag} ."
@@ -45,7 +45,7 @@ pipeline{
 
         stage("release") {
             when {
-                 branch 'master'
+                 tag 'v*'
             }
             steps {
                 sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
