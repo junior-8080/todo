@@ -45,9 +45,11 @@ pipeline{
         }
 
         stage("release") {
+
             when {
                  tag 'v*'
             }
+            
             steps {
                 sh "docker tag ${imageName}:${imageTag} ${imageName}:${TAG}"
                 sh "docker login --username ${DOCKERHUB_CRED_USR} --password '${DOCKERHUB_CRED_PSW}'"
