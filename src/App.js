@@ -80,7 +80,7 @@ class App extends Component{
     
     render(){
         const Todos = this.state.todos.length > 0 ?<>
-          <table width="100%" style={{height:"70vh"}} >
+          <table width="100%">
               {
                  this.state.todos.map(todo =>{
                     return (
